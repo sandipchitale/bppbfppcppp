@@ -32,7 +32,7 @@ public class BppbfppcpppApplication {
 			ConfigurationPropertiesBean configurationPropertiesBean = ConfigurationPropertiesBean.get(this.applicationContext, bean, beanName);
 			if (configurationPropertiesBean != null) {
 				// This is a ConfigurationProperties bean
-				System.out.println(String.format("Configuration Properties : %150.150s", beanName));
+//				System.out.println(String.format("Configuration Properties : %150.150s Beans Class: %s", beanName, bean.getClass().getName()));
 			} else {
 				System.out.println(String.format("Bean                     : %150.150s Beans Class: %s", beanName, bean.getClass().getName()));
 			}
