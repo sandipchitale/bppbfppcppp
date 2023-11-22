@@ -6,12 +6,10 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBean;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,11 +28,11 @@ public class BppbfppcpppApplication {
 		@Override
 		public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 			ConfigurationPropertiesBean configurationPropertiesBean = ConfigurationPropertiesBean.get(this.applicationContext, bean, beanName);
-			if (configurationPropertiesBean != null) {
-				// This is a ConfigurationProperties bean
-//				System.out.println(String.format("Configuration Properties : %150.150s Beans Class: %s", beanName, bean.getClass().getName()));
-			} else {
+			if (configurationPropertiesBean == null) {
 				System.out.println(String.format("Bean                     : %150.150s Beans Class: %s", beanName, bean.getClass().getName()));
+			} else {
+				// This is a ConfigurationProperties bean, CPPP will handle it
+				// System.out.println(String.format("Configuration Properties : %150.150s Beans Class: %s", beanName, bean.getClass().getName()));
 			}
 			return BeanPostProcessor.super.postProcessAfterInitialization(bean, beanName);
 		}
